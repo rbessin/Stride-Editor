@@ -44,9 +44,22 @@ export default function QuillEditor() {
         placeholder: 'Start typing...',
         modules: {
           toolbar: [
-            ['bold', 'italic', 'underline'],
-            [{ 'header': [1, 2, 3, false] }],
-            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+            [{ 'header': [1, 2, 3, 4, 5, 6, false] }], // Dropdown with Normal option
+            [{ 'font': [] }],
+            
+            ['bold', 'italic', 'underline', 'strike'],
+            [{ 'color': [] }, { 'background': [] }],
+            
+            [{ 'script': 'sub'}, { 'script': 'super' }],
+            
+            [{ 'list': 'ordered'}, { 'list': 'bullet' }, { 'list': 'check' }],
+            [{ 'indent': '-1'}, { 'indent': '+1' }],
+            [{ 'align': [] }],
+            [{ 'direction': 'rtl' }],
+            
+            ['blockquote', 'code-block'],
+            ['link', 'image', 'video', 'formula'],
+            
             ['clean']
           ],
           keyboard: {
