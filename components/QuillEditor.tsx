@@ -5,7 +5,12 @@ import type Quill from 'quill';
 import 'quill/dist/quill.snow.css';
 import '@/app/custom-quill.css';
 
-export default function QuillEditor() {
+interface QuillEditorProps {
+  fileContent?: string;
+  fileName?: string;
+}
+
+export default function QuillEditor({ fileContent, fileName }: QuillEditorProps) {
   const editorRef = useRef<HTMLDivElement>(null);
   const quillRef = useRef<Quill | null>(null);
   const [wordCount, setWordCount] = useState(0);
@@ -131,6 +136,42 @@ export default function QuillEditor() {
     };
   }, []);
 
+  // Load file content when it changes
+  useEffect(() => {
+    if (quillRef.current && fileContent !== undefined) {
+      const CHUNK_SIZE = 10000; // Insert 10k characters at a time
+      
+      if (fileContent.length > CHUNK_SIZE) {
+        // Clear editor first
+        quillRef.current.setText('');
+        
+        let index = 0;
+        const insertChunk = () => {
+          if (!quillRef.current || index >= fileContent.length) return;
+          
+          const chunk = fileContent.slice(index, index + CHUNK_SIZE);
+          quillRef.current.insertText(index, chunk);
+          index += CHUNK_SIZE;
+          
+          if (index < fileContent.length) {
+            setTimeout(insertChunk, 0);
+          } else {
+            quillRef.current.setSelection(0, 0);
+          }
+        };
+        
+        setTimeout(insertChunk, 50);
+      } else {
+        setTimeout(() => {
+          if (quillRef.current) {
+            quillRef.current.setText(fileContent);
+            quillRef.current.setSelection(0, 0);
+          }
+        }, 50);
+      }
+    }
+  }, [fileContent]);
+
   return (
     <div className="flex-1 flex flex-col overflow-auto">
       <div className="flex-1 bg-white dark:bg-tertiary flex flex-col">
@@ -140,6 +181,11 @@ export default function QuillEditor() {
         />
         
         <div className="text-xs text-gray-500 dark:text-white my-1 mx-1">
+          {fileName && (
+            <span className='px-1 py-0.5 bg-blue-200 dark:bg-blue-900 rounded mr-2'>
+              {fileName}
+            </span>
+          )}
           <span className='px-1 py-0.5 bg-gray-200 dark:bg-gray-700 rounded'>
             Word count: {wordCount}
           </span>

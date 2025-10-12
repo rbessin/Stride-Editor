@@ -11,6 +11,11 @@ const QuillEditor = dynamic(() => import('./QuillEditor'), {
   )
 });
 
-export default function RichTextEditor() {
-  return <QuillEditor />;
+interface RichTextEditorProps {
+  fileContent?: string;
+  fileName?: string;
+}
+
+export default function RichTextEditor({ fileContent, fileName }: RichTextEditorProps) {
+  return <QuillEditor fileContent={fileContent} fileName={fileName} />;
 }
