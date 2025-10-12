@@ -8,9 +8,10 @@ import '@/app/custom-quill.css';
 interface QuillEditorProps {
   fileContent?: string;
   fileName?: string;
+  onContentChange?: (getContent: () => Promise<{ content: string; fileName: string }>) => void;
 }
 
-export default function QuillEditor({ fileContent, fileName }: QuillEditorProps) {
+export default function QuillEditor({ fileContent, fileName, onContentChange }: QuillEditorProps) {
   const editorRef = useRef<HTMLDivElement>(null);
   const quillRef = useRef<Quill | null>(null);
   const [wordCount, setWordCount] = useState(0);
@@ -135,6 +136,16 @@ export default function QuillEditor({ fileContent, fileName }: QuillEditorProps)
       }
     };
   }, []);
+
+  // Provide content getter to parent
+  useEffect(() => {
+    if (onContentChange && quillRef.current) {
+      onContentChange(async () => ({
+        content: quillRef.current?.getText() || '',
+        fileName: fileName || 'untitled.txt'
+      }));
+    }
+  }, [onContentChange, fileName]);
 
   // Load file content when it changes
   useEffect(() => {
