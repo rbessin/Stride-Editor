@@ -1,0 +1,118 @@
+.ql-toolbar {
+  background: var(--primary-color);
+  border: none !important;
+  border-bottom: 1px solid #e5e7eb !important;
+}
+
+.ql-container {
+  font-family: 'Georgia', serif;
+  font-size: 16px;
+  border: none !important;
+  border-bottom: 1px solid #e5e7eb !important;
+}
+
+.ql-editor {
+  background: var(--secondary-color);
+  min-height: 400px;
+  padding: 20px;
+  line-height: 1.6;
+}
+
+/* Placeholder */
+.ql-editor.ql-blank::before {
+  color: #aaa;
+  font-style: italic;
+  padding-left: 6px;
+}
+
+/* Toolbar buttons */
+.ql-toolbar button {
+  width: 32px;
+  height: 32px;
+}
+
+.ql-toolbar button:hover {
+  background: #e8e8e8;
+  border-radius: 4px;
+}
+
+.ql-toolbar button.ql-active {
+  background: #d0d0d0;
+  border-radius: 4px;
+}
+
+/* Icons */
+.ql-stroke {
+  stroke: #444;
+}
+
+.ql-fill {
+  fill: #444;
+}
+
+/* Dropdowns */
+.ql-picker-label {
+  padding: 4px 8px;
+}
+
+.ql-picker-options {
+  background: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Content formatting */
+.ql-editor h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+.ql-editor h2 {
+  font-size: 1.5em;
+  margin: 0.75em 0;
+}
+
+.ql-editor blockquote {
+  border-left: 4px solid #ccc;
+  padding-left: 16px;
+  margin-left: 0;
+  color: #666;
+}
+
+.ql-editor pre {
+  background: #f4f4f4;
+  border-radius: 4px;
+  padding: 16px;
+}
+
+.ql-editor a {
+  color: #06c;
+  text-decoration: underline;
+}
+
+/* Lists */
+.ql-editor ol,
+.ql-editor ul {
+  padding-left: 1.5em;
+}
+
+.ql-editor li {
+  margin: 0.5em 0;
+}
+
+/* Alignment */
+.ql-editor .ql-align-center {
+  text-align: center;
+}
+
+.ql-editor .ql-align-right {
+  text-align: right;
+}
+
+/* Tooltips */
+.ql-tooltip {
+  background: #444;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+}
