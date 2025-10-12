@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Quill from 'quill';
 import 'quill/dist/quill.snow.css';
 import '@/app/custom-quill.css';
-import { trainOnNewWord, predictNextWord } from '@/lib/predictText';
+import { loadModels, predictNextWord, areModelsLoaded } from '@/lib/predictText';
 
 export default function RichTextEditor() {
   const editorRef = useRef<HTMLDivElement>(null);
@@ -12,11 +12,29 @@ export default function RichTextEditor() {
   const [wordCount, setWordCount] = useState(0);
   const [words, setWords] = useState<string[]>([]);
   const [prediction, setPrediction] = useState<string | null>(null);
+  const [modelsLoaded, setModelsLoaded] = useState(false);
   const predictionRef = useRef<string | null>(null);
   const previousWordsRef = useRef<string[]>([]);
+  const isInitialized = useRef(false); // Add this to prevent double initialization
+
+  // Load models on component mount
+  useEffect(() => {
+    async function initModels() {
+      try {
+        await loadModels();
+        setModelsLoaded(true);
+        console.log('Prediction models loaded successfully');
+      } catch (error) {console.error('Failed to load prediction models:', error);}
+    }
+    
+    initModels();
+  }, []);
 
   useEffect(() => {
-    if (editorRef.current && !quillRef.current) {
+    // Prevent double initialization
+    if (editorRef.current && !quillRef.current && !isInitialized.current) {
+      isInitialized.current = true; // Mark as initialized
+      
       // Initialize Quill
       quillRef.current = new Quill(editorRef.current, {
         theme: 'snow',
@@ -29,21 +47,23 @@ export default function RichTextEditor() {
             ['clean']
           ],
           keyboard: { bindings: { tab: {
-            key: 9, // Tab key code
+            key: 9,
             handler: function() {
               if (predictionRef.current && quillRef.current) {
                 const selection = quillRef.current.getSelection();
                 
                 if (selection) {
-                  // Insert the prediction, move cursor and clear prediction
-                  quillRef.current.insertText(selection.index, predictionRef.current + ' ');
-                  quillRef.current.setSelection(selection.index + predictionRef.current.length + 1);
+                  const predText = predictionRef.current;
+                  // Clear prediction before inserting to prevent race condition
                   setPrediction(null);
                   predictionRef.current = null;
+                  
+                  quillRef.current.insertText(selection.index, predText + ' ');
+                  quillRef.current.setSelection(selection.index + predText.length + 1);
                 }
-                return false; // Prevent default tab behavior
+                return false;
               }
-              return true; // Allow default if no prediction
+              return true;
             }
           }}}
         }
@@ -53,54 +73,43 @@ export default function RichTextEditor() {
       quillRef.current.on('text-change', (delta) => {
         const text = quillRef.current?.getText() || '';
         
-        // Check if the last change was adding a space (word completion)
-        const lastOp = delta.ops[delta.ops.length - 1];
+        const lastOp = delta.ops && delta.ops.length > 0 ? delta.ops[delta.ops.length - 1] : null;
         const justTypedSpace = lastOp?.insert === ' ' || lastOp?.insert === '\n';
         
-        // Split into words
-        const currentWords = text.trim().split(/\s+/).filter(word => word.length > 0);
+        const currentWords = text
+          .trim()
+          .split(/\s+/)
+          .filter(word => word.length > 0)
+          .map(word => word.toLowerCase());
         
-        // Only train when a space/newline was just typed
-        if (justTypedSpace && currentWords.length > previousWordsRef.current.length) {
-          if (currentWords.length >= 2) {
-            const contextWord = currentWords[currentWords.length - 2];
-            const newWord = currentWords[currentWords.length - 1];
-            trainOnNewWord(contextWord, newWord);
-          }
+        if (justTypedSpace && areModelsLoaded()) {
           previousWordsRef.current = currentWords;
           
-          // Get prediction after typing space
           const pred = predictNextWord(currentWords);
           setPrediction(pred);
           predictionRef.current = pred;
-        } else if (justTypedSpace) {
-          // If space was typed but no new word added, clear prediction
-          setPrediction(null);
-          predictionRef.current = null;
+        } else if (!justTypedSpace && currentWords.length > 0) {
+          const lastWord = text.trim().split(/\s+/).pop() || '';
+          if (lastWord.length > 0 && !lastWord.match(/^\s/)) {
+            setPrediction(null);
+            predictionRef.current = null;
+          }
         }
-        // DON'T clear prediction when typing regular characters - keep it visible!
-        
+        console.log("Text changed.")
         setWords(currentWords);
         setWordCount(currentWords.length);
       });
     }
-
-    return () => {
-      if (quillRef.current) {
-        quillRef.current = null;
-      }
-    };
-  }, []);
+  }, []); // Empty dependency array - only run once on mount
 
   return (
     <div className="flex-1 flex flex-col overflow-auto">
       <div className="flex-1 bg-white dark:bg-tertiary flex flex-col">
-        <div 
+        <div
           ref={editorRef} 
           className="flex-1 prose dark:prose-invert max-w-none relative"
         />
         
-        {/* Ghost text */}
         {prediction && (
           <div 
             className="text-gray-400"
@@ -110,10 +119,17 @@ export default function RichTextEditor() {
         )}
         
         <div className="text-xs text-gray-500 dark:text-white my-1 mx-1">
-          <span className='px-1 py-0.5 bg-gray-200 dark:bg-gray-700 rounded'>Word count: {wordCount}</span>
-          {prediction && (
+          <span className='px-1 py-0.5 bg-gray-200 dark:bg-gray-700 rounded'>
+            Word count: {wordCount}
+          </span>
+          {!modelsLoaded && (
+            <span className="ml-4 text-yellow-600 dark:text-yellow-400">
+              Loading prediction models...
+            </span>
+          )}
+          {modelsLoaded && prediction && (
             <span className="ml-4">
-              Press <kbd className="px-1 py-0.5 bg-gray-200 dark:bg-gray-700 rounded">Tab</kbd> to accept &quot; {prediction} &quot;
+              Press <kbd className="px-1 py-0.5 bg-gray-200 dark:bg-gray-700 rounded">Tab</kbd> to accept &quot;{prediction}&quot;
             </span>
           )}
         </div>

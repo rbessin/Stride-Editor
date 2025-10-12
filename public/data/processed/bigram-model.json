@@ -1,0 +1,13 @@
+{
+  "n": 2,
+  "nGrams": [
+    {
+      "context": "want",
+      "words": [["to", 10], ["a", 3]]
+    },
+    {
+      "context": "to",
+      "words": [["go", 5], ["be", 4], ["see", 3]]
+    }
+  ]
+}

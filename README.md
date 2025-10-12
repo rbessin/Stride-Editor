@@ -25,8 +25,7 @@ Ghost Text: Light gray text appears after cursor, disappears on any key except T
 Quality of life: Information located at the bottom of the editor
 Key Interaction: Type → See prediction → Press Tab to accept OR keep typing to dismiss
 
-### Requirements
-MVP Features:
+### Requirements / MVP Features
 + Text editor with basic formatting
 + Real-time next-word predictions (ghost text in gray)
 + Tab key accepts prediction
