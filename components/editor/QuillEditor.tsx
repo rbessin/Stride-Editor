@@ -143,7 +143,7 @@ export default function QuillEditor({ fileContent, fileName, onContentChange }: 
       if (quillRef.current) {
         try {
           quillRef.current.off('text-change');
-        } catch (e) {}
+        } catch {}
         quillRef.current = null;
       }
     };
