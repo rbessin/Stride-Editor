@@ -11,6 +11,17 @@ interface QuillEditorProps {
   onContentChange?: (getContent: () => Promise<{ content: string; fileName: string }>) => void;
 }
 
+interface DeltaOperation {
+  insert?: string | Record<string, unknown>;
+  delete?: number;
+  retain?: number;
+  attributes?: Record<string, unknown>;
+}
+
+interface Delta {
+  ops?: DeltaOperation[];
+}
+
 export default function QuillEditor({ fileContent, fileName, onContentChange }: QuillEditorProps) {
   const editorRef = useRef<HTMLDivElement>(null);
   const quillRef = useRef<Quill | null>(null);
@@ -95,7 +106,7 @@ export default function QuillEditor({ fileContent, fileName, onContentChange }: 
       });
 
       // Text change handler
-      quillRef.current.on('text-change', (delta: any) => {
+      quillRef.current.on('text-change', (delta: Delta) => {
         if (!quillRef.current) return;
         
         const text = quillRef.current.getText() || '';
