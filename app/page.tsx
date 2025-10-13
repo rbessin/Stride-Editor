@@ -1,9 +1,9 @@
 'use client';
 
 import { useState, useRef } from 'react';
-import Header from "@/components/Header";
-import Sidebar from "@/components/Sidebar";
-import RichTextEditor from "@/components/RichTextEditor";
+import Header from "@/components/layout/Header";
+import Sidebar from "@/components/layout/Sidebar";
+import RichTextEditor from "@/components/editor/RichTextEditor";
 
 export default function Home() {
   const [currentFile, setCurrentFile] = useState<{

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { ReactElement } from 'react';
+import { FolderOpenIcon, DocumentTextIcon, DocumentPlusIcon, ArrowDownTrayIcon, XMarkIcon } from '@heroicons/react/24/solid';
 
 // Define the structure for a file item in the sidebar
 interface FileItem {
@@ -481,34 +482,24 @@ export default function Sidebar({ onFileSelect, onLoadingChange, onSaveRequest }
       <div className="flex flex-wrap gap-2 p-1 rounded-md bg-secondary text-sm">
         <button
           onClick={handleOpenFolder}
-          className="px-1 py-0.5 bg-gray-200 hover:bg-gray-800 active:ring-1 dark:bg-gray-700 rounded"
-        >
-          Open Folder
-        </button>
+          className="flex items-center gap-1 p-1 bg-gray-200 hover:bg-gray-800 active:ring-1 dark:bg-gray-700 rounded"
+        > <FolderOpenIcon className="w-4 h-4" /> </button>
         <button
           onClick={handleOpenFile}
-          className="px-1 py-0.5 bg-gray-200 hover:bg-gray-800 active:ring-1 dark:bg-gray-700 rounded"
-        >
-          Open File
-        </button>
+          className="flex items-center gap-1 p-1 bg-gray-200 hover:bg-gray-800 active:ring-1 dark:bg-gray-700 rounded"
+        > <DocumentTextIcon className="w-4 h-4" /> </button>
         <button
           onClick={handleCreateFile}
-          className="px-1 py-0.5 bg-gray-200 hover:bg-gray-800 active:ring-1 dark:bg-gray-700 rounded"
-        >
-          New File
-        </button>
+          className="flex items-center gap-1 p-1 bg-gray-200 hover:bg-gray-800 active:ring-1 dark:bg-gray-700 rounded"
+        > <DocumentPlusIcon className="w-4 h-4" /> </button>
         <button
           onClick={handleSave}
-          className="px-1 py-0.5 bg-blue-500 text-white hover:bg-blue-600 active:ring-1 rounded"
-        >
-          Save
-        </button>
+          className="flex items-center gap-1 p-1 bg-blue-500 text-white hover:bg-blue-600 active:ring-1 rounded"
+        > <ArrowDownTrayIcon className="w-4 h-4" /> </button>
         <button
           onClick={handleCloseAll}
-          className="px-1 py-0.5 bg-gray-200 hover:bg-gray-800 active:ring-1 dark:bg-gray-700 rounded"
-        >
-          Close All
-        </button>
+          className="flex items-center gap-1 p-1 bg-gray-200 hover:bg-gray-800 active:ring-1 dark:bg-gray-700 rounded"
+        > <XMarkIcon className="w-4 h-4" /> </button>
       </div>
 
       {/* New file input dialog */}

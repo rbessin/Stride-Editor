@@ -11,7 +11,7 @@ export default function Header() {
                         Documents
                     </button>
                     <button className="text-gray-600 dark:text-gray-300 px-2 hover:rounded-md hover:bg-secondary hover:text-gray-900 dark:hover:text-white">
-                        Statistics
+                        Settings
                     </button>
                 </nav>
             </div>
