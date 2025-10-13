@@ -1,7 +1,7 @@
 import React from 'react';
 
 type LabelVariant = 'default' | 'primary' | 'success' | 'warning' | 'danger' | 'info';
-type LabelSize = 'xs' | 'sm' | 'md';
+type LabelSize = 'sm' | 'md' | 'lg';
 
 interface LabelProps {
   children: React.ReactNode;
@@ -13,24 +13,24 @@ interface LabelProps {
 export function Label({ 
   children, 
   variant = 'default',
-  size = 'sm',
+  size = 'md',
   className = ''
 }: LabelProps) {
   const baseStyles = "inline-flex items-center rounded font-medium";
   
   const sizeStyles = {
-    xs: "px-1 py-0.5 text-xs",
-    sm: "px-2 py-1 text-sm",
-    md: "px-3 py-1.5 text-base"
+    sm: "px-1 py-0.5 text-xs",
+    md: "px-2 py-1 text-sm",
+    lg: "px-3 py-1.5 text-base"
   };
   
   const variantStyles = {
     default: "bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-200",
-    primary: "bg-blue-200 text-blue-900 dark:bg-blue-900 dark:text-blue-200",
-    success: "bg-green-200 text-green-900 dark:bg-green-900 dark:text-green-200",
-    warning: "bg-yellow-200 text-yellow-900 dark:bg-yellow-900 dark:text-yellow-200",
-    danger: "bg-red-200 text-red-900 dark:bg-red-900 dark:text-red-200",
-    info: "bg-cyan-200 text-cyan-900 dark:bg-cyan-900 dark:text-cyan-200"
+    primary: "bg-primary text-foreground",
+    success: "bg-success text-foreground",
+    warning: "bg-warning text-foreground",
+    danger: "bg-danger text-foreground",
+    info: "bg-info text-foreground"
   };
 
   return (

@@ -464,7 +464,7 @@ export default function Sidebar({ onFileSelect, onLoadingChange, onSaveRequest }
   };
 
   return (
-    <div className="flex flex-col w-1/6 p-1 bg-white dark:bg-tertiary border-r">
+    <div className="flex flex-col w-1/6 p-1 bg-white dark:bg-tertiary">
       <Header />
       {/* Action buttons */}
       <div className="flex flex-wrap gap-2 p-1 rounded-md bg-secondary text-sm">

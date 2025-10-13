@@ -201,20 +201,20 @@ export default function QuillEditor({ fileContent, fileName, onContentChange }: 
 
   return (
     <div className="flex-1 flex flex-col overflow-auto">
-      <div className="flex-1 bg-white dark:bg-tertiary flex flex-col">
+      <div className="flex-1 bg-secondary flex flex-col">
         <div
           ref={editorRef} 
           className="flex-1 prose dark:prose-invert max-w-none relative"
         />
         
         <div className="text-xs my-1 mx-1 flex gap-2 items-center">
-          {fileName && (<Label variant="primary" size="xs">{fileName}</Label>)}
+          {fileName && (<Label variant="primary" size="sm">{fileName}</Label>)}
           
-          <Label variant="default" size="xs">Word count: {wordCount}</Label>
+          <Label variant="default" size="sm">Word count: {wordCount}</Label>
           
-          {!modelsLoaded && (<Label variant="warning" size="xs">Loading prediction models...</Label>)}
+          {!modelsLoaded && (<Label variant="warning" size="sm">Loading prediction models...</Label>)}
           {modelsLoaded && prediction && (
-            <Label variant="info" size="xs">Press <kbd className="px-1 py-0.5 mx-1 bg-gray-300 dark:bg-gray-600 rounded">Tab</kbd> to accept &quot;{prediction}&quot;</Label>
+            <Label variant="info" size="sm">Press <kbd className="px-1 py-0.5 mx-1 bg-gray-300 dark:bg-gray-600 rounded">Tab</kbd> to accept &quot;{prediction}&quot;</Label>
           )}
         </div>
       </div>

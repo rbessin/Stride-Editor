@@ -46,10 +46,10 @@ export function IconButton({
   const variantStyles = {
     default: "bg-gray-200 hover:bg-gray-300 active:bg-gray-400 dark:bg-gray-700 dark:hover:bg-gray-600 dark:active:bg-gray-500",
     primary: "bg-primary text-foreground hover:opacity-90 active:opacity-80",
-    success: "bg-success text-white hover:opacity-90 active:opacity-80",
-    warning: "bg-warning text-white hover:opacity-90 active:opacity-80",
-    danger: "bg-danger text-white hover:opacity-90 active:opacity-80",
-    info: "bg-info text-white hover:opacity-90 active:opacity-80"
+    success: "bg-success text-foreground hover:opacity-90 active:opacity-80",
+    warning: "bg-warning text-foreground hover:opacity-90 active:opacity-80",
+    danger: "bg-danger text-foreground hover:opacity-90 active:opacity-80",
+    info: "bg-info text-foreground hover:opacity-90 active:opacity-80"
   };
   
   const disabledStyles = "opacity-50 cursor-not-allowed";
@@ -85,10 +85,10 @@ export function TextButton({
   const variantStyles = {
     default: "bg-gray-200 hover:bg-gray-300 active:bg-gray-400 dark:bg-gray-700 dark:hover:bg-gray-600 dark:active:bg-gray-500",
     primary: "bg-primary text-foreground hover:opacity-90 active:opacity-80",
-    success: "bg-success text-white hover:opacity-90 active:opacity-80",
-    warning: "bg-warning text-white hover:opacity-90 active:opacity-80",
-    danger: "bg-danger text-white hover:opacity-90 active:opacity-80",
-    info: "bg-info text-white hover:opacity-90 active:opacity-80"
+    success: "bg-success text-foreground hover:opacity-90 active:opacity-80",
+    warning: "bg-warning text-foreground hover:opacity-90 active:opacity-80",
+    danger: "bg-danger text-foreground hover:opacity-90 active:opacity-80",
+    info: "bg-info text-foreground hover:opacity-90 active:opacity-80"
   };
   
   const disabledStyles = "opacity-50 cursor-not-allowed";

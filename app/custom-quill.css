@@ -1,21 +1,42 @@
+/* Toolbar */
 .ql-toolbar {
-  background: var(--primary-color);
+  background: var(--color-tertiary);
   border: none !important;
-  border-bottom: 1px solid #e5e7eb !important;
+  border-radius: 6px;
+  margin: 4px;
+  padding: 8px;
 }
 
+.dark .ql-toolbar {
+  background: var(--color-tertiary);
+}
+
+/* Container */
 .ql-container {
   font-family: 'Georgia', serif;
   font-size: 16px;
   border: none !important;
-  border-bottom: 1px solid #e5e7eb !important;
+  border-bottom: 1px solid var(--color-tertiary) !important;
 }
 
+.dark .ql-container {
+  background-color: var(--color-background);
+  border-bottom-color: var(--color-tertiary) !important;
+}
+
+/* Editor */
+/* Editor */
 .ql-editor {
-  background: var(--secondary-color);
+  background: var(--color-secondary);
+  color: var(--color-foreground);
   min-height: 400px;
   padding: 20px;
   line-height: 1.6;
+}
+
+.dark .ql-editor {
+  background: var(--color-secondary);  /* Changed from tertiary to background */
+  color: var(--color-foreground) !important;
 }
 
 /* Placeholder */
@@ -25,6 +46,10 @@
   padding-left: 6px;
 }
 
+.dark .ql-editor.ql-blank::before {
+  color: rgba(237, 237, 237, 0.5);
+}
+
 /* Toolbar buttons */
 .ql-toolbar button {
   width: 32px;
@@ -32,61 +57,115 @@
 }
 
 .ql-toolbar button:hover {
-  background: #e8e8e8;
+  background: rgba(0, 0, 0, 0.1);
   border-radius: 4px;
 }
 
+.dark .ql-toolbar button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
 .ql-toolbar button.ql-active {
-  background: #d0d0d0;
+  background: rgba(0, 0, 0, 0.15);
   border-radius: 4px;
+}
+
+.dark .ql-toolbar button.ql-active {
+  background: rgba(255, 255, 255, 0.15);
 }
 
 /* Icons */
 .ql-stroke {
-  stroke: #444;
+  stroke: var(--color-foreground);
 }
 
 .ql-fill {
-  fill: #444;
+  fill: var(--color-foreground);
+}
+
+.dark .ql-stroke {
+  stroke: var(--color-foreground) !important;
+}
+
+.dark .ql-fill {
+  fill: var(--color-foreground) !important;
 }
 
 /* Dropdowns */
 .ql-picker-label {
   padding: 4px 8px;
+  color: var(--color-foreground);
+}
+
+.dark .ql-picker-label {
+  color: var(--color-foreground) !important;
 }
 
 .ql-picker-options {
-  background: white;
-  border: 1px solid #ccc;
+  background: var(--color-background);
+  border: 1px solid var(--color-tertiary);
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.dark .ql-picker-options {
+  background: var(--color-secondary);
+  border-color: var(--color-tertiary);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.dark .ql-picker-item {
+  color: var(--color-foreground);
+}
+
+.dark .ql-picker-item:hover {
+  background: var(--color-tertiary);
 }
 
 /* Content formatting */
 .ql-editor h1 {
   font-size: 2em;
   margin: 0.67em 0;
+  color: var(--color-foreground);
 }
 
 .ql-editor h2 {
   font-size: 1.5em;
   margin: 0.75em 0;
+  color: var(--color-foreground);
 }
 
 .ql-editor blockquote {
-  border-left: 4px solid #ccc;
+  border-left: 4px solid var(--color-tertiary);
   padding-left: 16px;
   margin-left: 0;
-  color: #666;
+  color: var(--color-foreground);
+  opacity: 0.8;
 }
 
 .ql-editor pre {
-  background: #f4f4f4;
+  background: rgba(0, 0, 0, 0.05);
   border-radius: 4px;
   padding: 16px;
+  color: var(--color-foreground);
+}
+
+.dark .ql-editor pre {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.ql-editor code {
+  background: rgba(0, 0, 0, 0.05);
+  padding: 2px 4px;
+  border-radius: 3px;
+  color: var(--color-foreground);
+}
+
+.dark .ql-editor code {
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .ql-editor a {
-  color: #06c;
+  color: var(--color-info);
   text-decoration: underline;
 }
 
@@ -98,6 +177,7 @@
 
 .ql-editor li {
   margin: 0.5em 0;
+  color: var(--color-foreground);
 }
 
 /* Alignment */
@@ -111,8 +191,40 @@
 
 /* Tooltips */
 .ql-tooltip {
-  background: #444;
-  color: white;
+  background: var(--color-tertiary);
+  color: var(--color-foreground);
   padding: 8px 12px;
   border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.dark .ql-tooltip {
+  background: var(--color-secondary);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+.ql-tooltip input {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  border: 1px solid var(--color-tertiary);
+  padding: 4px 8px;
+  border-radius: 3px;
+}
+
+.dark .ql-tooltip input {
+  background: var(--color-tertiary);
+}
+
+/* Formula (KaTeX) */
+.ql-editor .ql-formula {
+  color: var(--color-foreground);
+}
+
+/* Snow theme specific overrides */
+.ql-snow .ql-picker.ql-expanded .ql-picker-label {
+  border-color: var(--color-tertiary);
+}
+
+.dark .ql-snow .ql-picker.ql-expanded .ql-picker-options {
+  border-color: var(--color-tertiary);
 }

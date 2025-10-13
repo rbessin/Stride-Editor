@@ -23,12 +23,12 @@
 /* Dark mode overrides */
 html.dark {
   --color-primary: #1a1a1a;
-  --color-secondary: #3d4f48;
-  --color-tertiary: #5a6b65;
+  --color-secondary: #2d3436;
+  --color-tertiary: #3d4f48;
   --color-background: #0a0a0a;
   --color-foreground: #ededed;
   
-  /* Semantic colors - Dark mode (slightly muted for better contrast) */
+  /* Semantic colors - Dark mode */
   --color-success: #4ade80;
   --color-warning: #fbbf24;
   --color-danger: #f87171;
