@@ -1,6 +1,7 @@
 import React from 'react';
 
-type ButtonVariant = 'default' | 'primary' | 'danger';
+// CHANGE: Added 'success', 'warning', and 'info' to ButtonVariant type
+type ButtonVariant = 'default' | 'primary' | 'success' | 'warning' | 'danger' | 'info';
 type ButtonSize = 'sm' | 'md' | 'lg';
 
 interface BaseButtonProps {
@@ -41,11 +42,14 @@ export function IconButton({
     md: "w-4 h-4",
     lg: "w-5 h-5"
   };
-  
+
   const variantStyles = {
     default: "bg-gray-200 hover:bg-gray-300 active:bg-gray-400 dark:bg-gray-700 dark:hover:bg-gray-600 dark:active:bg-gray-500",
-    primary: "bg-blue-500 text-white hover:bg-blue-600 active:bg-blue-700",
-    danger: "bg-red-500 text-white hover:bg-red-600 active:bg-red-700"
+    primary: "bg-primary text-foreground hover:opacity-90 active:opacity-80",
+    success: "bg-success text-white hover:opacity-90 active:opacity-80",
+    warning: "bg-warning text-white hover:opacity-90 active:opacity-80",
+    danger: "bg-danger text-white hover:opacity-90 active:opacity-80",
+    info: "bg-info text-white hover:opacity-90 active:opacity-80"
   };
   
   const disabledStyles = "opacity-50 cursor-not-allowed";
@@ -77,11 +81,14 @@ export function TextButton({
     md: "px-3 py-1 text-sm",
     lg: "px-4 py-1.5 text-base"
   };
-  
+
   const variantStyles = {
     default: "bg-gray-200 hover:bg-gray-300 active:bg-gray-400 dark:bg-gray-700 dark:hover:bg-gray-600 dark:active:bg-gray-500",
-    primary: "bg-blue-500 text-white hover:bg-blue-600 active:bg-blue-700",
-    danger: "bg-red-500 text-white hover:bg-red-600 active:bg-red-700"
+    primary: "bg-primary text-foreground hover:opacity-90 active:opacity-80",
+    success: "bg-success text-white hover:opacity-90 active:opacity-80",
+    warning: "bg-warning text-white hover:opacity-90 active:opacity-80",
+    danger: "bg-danger text-white hover:opacity-90 active:opacity-80",
+    info: "bg-info text-white hover:opacity-90 active:opacity-80"
   };
   
   const disabledStyles = "opacity-50 cursor-not-allowed";

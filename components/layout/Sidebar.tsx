@@ -2,6 +2,8 @@ import { useState } from 'react';
 import type { ReactElement } from 'react';
 import { FolderOpenIcon, DocumentTextIcon, DocumentPlusIcon, ArrowDownTrayIcon, XMarkIcon, Cog6ToothIcon, AdjustmentsHorizontalIcon } from '@heroicons/react/24/solid';
 import { IconButton, TextButton } from '@/components/ui/Button';
+import Header from './Header';
+import { ThemeToggle } from '../theme-toggle';
 
 // Define the structure for a file item in the sidebar
 interface FileItem {
@@ -463,14 +465,16 @@ export default function Sidebar({ onFileSelect, onLoadingChange, onSaveRequest }
 
   return (
     <div className="flex flex-col w-1/6 p-1 bg-white dark:bg-tertiary border-r">
+      <Header />
       {/* Action buttons */}
       <div className="flex flex-wrap gap-2 p-1 rounded-md bg-secondary text-sm">
         <IconButton icon={FolderOpenIcon} onClick={handleOpenFolder} />
         <IconButton icon={DocumentTextIcon} onClick={handleOpenFile} />
         <IconButton icon={DocumentPlusIcon} onClick={handleCreateFile} />
-        <IconButton icon={ArrowDownTrayIcon} onClick={handleSave} variant="primary" />
-        <IconButton icon={XMarkIcon} onClick={handleCloseAll} />
+        <IconButton icon={ArrowDownTrayIcon} onClick={handleSave} variant="info" />
+        <IconButton icon={XMarkIcon} onClick={handleCloseAll} variant="danger" />
         <IconButton icon={Cog6ToothIcon} onClick={() => {}} />
+        <ThemeToggle />
       </div>
 
       {/* New file input dialog */}
