@@ -1,0 +1,44 @@
+<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#2563eb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- White rounded square background -->
+  <rect x="20" y="20" width="360" height="360" rx="40" fill="white"/>
+  
+  <!-- Centered three wave lines -->
+  <g transform="translate(200, 180)">
+    <!-- Top wave -->
+    <path d="M -100 0 Q -75 -40, -50 -40 Q -25 -40, 0 -15 Q 25 10, 50 10 Q 75 10, 100 -15" 
+          stroke="url(#waveGradient)" 
+          stroke-width="14" 
+          fill="none" 
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+    
+    <!-- Middle wave -->
+    <path d="M -100 25 Q -75 -10, -50 -10 Q -25 -10, 0 10 Q 25 30, 50 30 Q 75 30, 100 10" 
+          stroke="url(#waveGradient)" 
+          stroke-width="12" 
+          fill="none" 
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          opacity="0.7"/>
+    
+    <!-- Bottom wave -->
+    <path d="M -100 45 Q -75 10, -50 10 Q -25 10, 0 30 Q 25 50, 50 50 Q 75 50, 100 30" 
+          stroke="url(#waveGradient)" 
+          stroke-width="10" 
+          fill="none" 
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          opacity="0.5"/>
+    
+    <!-- Dot underneath the third wave, inside the left curve -->
+    <circle cx="-50" cy="70" r="16" fill="#2563eb"/>
+  </g>
+</svg>
