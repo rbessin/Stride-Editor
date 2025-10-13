@@ -3,7 +3,7 @@ import type { ReactElement } from 'react';
 import { FolderOpenIcon, DocumentTextIcon, DocumentPlusIcon, ArrowDownTrayIcon, XMarkIcon, Cog6ToothIcon, AdjustmentsHorizontalIcon } from '@heroicons/react/24/solid';
 import { IconButton, TextButton } from '@/components/ui/Button';
 import Header from './Header';
-import { ThemeToggle } from '../theme-toggle';
+import { ThemeToggle } from '../theme/theme-toggle';
 
 // Define the structure for a file item in the sidebar
 interface FileItem {
