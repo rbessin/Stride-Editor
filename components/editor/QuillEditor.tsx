@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import type Quill from 'quill';
 import 'quill/dist/quill.snow.css';
 import '@/app/custom-quill.css';
+import { Label } from '@/components/ui/Label';
 
 interface QuillEditorProps {
   fileContent?: string;
@@ -202,24 +203,14 @@ export default function QuillEditor({ fileContent, fileName, onContentChange }: 
           className="flex-1 prose dark:prose-invert max-w-none relative"
         />
         
-        <div className="text-xs text-gray-500 dark:text-white my-1 mx-1">
-          {fileName && (
-            <span className='px-1 py-0.5 bg-blue-200 dark:bg-blue-900 rounded mr-2'>
-              {fileName}
-            </span>
-          )}
-          <span className='px-1 py-0.5 bg-gray-200 dark:bg-gray-700 rounded'>
-            Word count: {wordCount}
-          </span>
-          {!modelsLoaded && (
-            <span className="ml-4 text-yellow-600 dark:text-yellow-400">
-              Loading prediction models...
-            </span>
-          )}
+        <div className="text-xs my-1 mx-1 flex gap-2 items-center">
+          {fileName && (<Label variant="primary" size="xs">{fileName}</Label>)}
+          
+          <Label variant="default" size="xs">Word count: {wordCount}</Label>
+          
+          {!modelsLoaded && (<Label variant="warning" size="xs">Loading prediction models...</Label>)}
           {modelsLoaded && prediction && (
-            <span className="ml-4">
-              Press <kbd className="px-1 py-0.5 bg-gray-200 dark:bg-gray-700 rounded">Tab</kbd> to accept &quot;{prediction}&quot;
-            </span>
+            <Label variant="info" size="xs">Press <kbd className="px-1 py-0.5 mx-1 bg-gray-300 dark:bg-gray-600 rounded">Tab</kbd> to accept &quot;{prediction}&quot;</Label>
           )}
         </div>
       </div>

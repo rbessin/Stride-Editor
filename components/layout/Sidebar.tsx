@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { ReactElement } from 'react';
 import { FolderOpenIcon, DocumentTextIcon, DocumentPlusIcon, ArrowDownTrayIcon, XMarkIcon } from '@heroicons/react/24/solid';
+import { IconButton, TextButton } from '@/components/ui/Button';
 
 // Define the structure for a file item in the sidebar
 interface FileItem {
@@ -426,15 +427,7 @@ export default function Sidebar({ onFileSelect, onLoadingChange, onSaveRequest }
           </div>
           {/* Only show close button for root-level items */}
           {depth === 0 && (
-            <button
-              onClick={(e) => {
-                e.stopPropagation(); // Prevent triggering file click
-                handleCloseItem(item.id);
-              }}
-              className="ml-2 text-gray-500 hover:text-red-600 dark:hover:text-red-400 text-xs"
-            >
-              ✕
-            </button>
+            <IconButton icon={XMarkIcon} onClick={(e) => {e?.stopPropagation(); handleCloseItem(item.id);}} variant="danger" size="sm" className="ml-2"/>
           )}
         </div>
       );
@@ -455,15 +448,7 @@ export default function Sidebar({ onFileSelect, onLoadingChange, onSaveRequest }
           </div>
           {/* Only show close button for root-level items */}
           {depth === 0 && (
-            <button
-              onClick={(e) => {
-                e.stopPropagation(); // Prevent triggering folder toggle
-                handleCloseItem(item.id);
-              }}
-              className="ml-2 text-gray-500 hover:text-red-600 dark:hover:text-red-400 text-xs"
-            >
-              ✕
-            </button>
+            <IconButton icon={XMarkIcon} onClick={(e) => {e?.stopPropagation(); handleCloseItem(item.id);}} variant="danger" size="sm" className="ml-2"/>
           )}
         </div>
         {/* Render children if folder is expanded */}
@@ -480,26 +465,11 @@ export default function Sidebar({ onFileSelect, onLoadingChange, onSaveRequest }
     <div className="flex flex-col w-1/6 p-1 bg-white dark:bg-tertiary border-r">
       {/* Action buttons */}
       <div className="flex flex-wrap gap-2 p-1 rounded-md bg-secondary text-sm">
-        <button
-          onClick={handleOpenFolder}
-          className="flex items-center gap-1 p-1 bg-gray-200 hover:bg-gray-800 active:ring-1 dark:bg-gray-700 rounded"
-        > <FolderOpenIcon className="w-4 h-4" /> </button>
-        <button
-          onClick={handleOpenFile}
-          className="flex items-center gap-1 p-1 bg-gray-200 hover:bg-gray-800 active:ring-1 dark:bg-gray-700 rounded"
-        > <DocumentTextIcon className="w-4 h-4" /> </button>
-        <button
-          onClick={handleCreateFile}
-          className="flex items-center gap-1 p-1 bg-gray-200 hover:bg-gray-800 active:ring-1 dark:bg-gray-700 rounded"
-        > <DocumentPlusIcon className="w-4 h-4" /> </button>
-        <button
-          onClick={handleSave}
-          className="flex items-center gap-1 p-1 bg-blue-500 text-white hover:bg-blue-600 active:ring-1 rounded"
-        > <ArrowDownTrayIcon className="w-4 h-4" /> </button>
-        <button
-          onClick={handleCloseAll}
-          className="flex items-center gap-1 p-1 bg-gray-200 hover:bg-gray-800 active:ring-1 dark:bg-gray-700 rounded"
-        > <XMarkIcon className="w-4 h-4" /> </button>
+        <IconButton icon={FolderOpenIcon} onClick={handleOpenFolder} />
+        <IconButton icon={DocumentTextIcon} onClick={handleOpenFile} />
+        <IconButton icon={DocumentPlusIcon} onClick={handleCreateFile} />
+        <IconButton icon={ArrowDownTrayIcon} onClick={handleSave} variant="primary" />
+        <IconButton icon={XMarkIcon} onClick={handleCloseAll} />
       </div>
 
       {/* New file input dialog */}
@@ -518,18 +488,8 @@ export default function Sidebar({ onFileSelect, onLoadingChange, onSaveRequest }
             autoFocus
           />
           <div className="flex gap-2 mt-2">
-            <button
-              onClick={confirmCreateFile}
-              className="flex-1 px-2 py-1 text-xs bg-blue-500 text-white rounded hover:bg-blue-600"
-            >
-              Create
-            </button>
-            <button
-              onClick={cancelCreateFile}
-              className="flex-1 px-2 py-1 text-xs bg-gray-300 dark:bg-gray-600 rounded hover:bg-gray-400 dark:hover:bg-gray-500"
-            >
-              Cancel
-            </button>
+            <TextButton onClick={confirmCreateFile} variant="primary" size="md" className="flex-1">Create</TextButton>
+            <TextButton onClick={cancelCreateFile} variant="default" size="md" className="flex-1">Cancel</TextButton>
           </div>
         </div>
       )}
