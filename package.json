@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
+    "katex": "^0.16.25",
     "next": "15.5.4",
     "quill": "^2.0.3",
     "react": "19.1.0",

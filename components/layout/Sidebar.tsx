@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { ReactElement } from 'react';
-import { FolderOpenIcon, DocumentTextIcon, DocumentPlusIcon, ArrowDownTrayIcon, XMarkIcon } from '@heroicons/react/24/solid';
+import { FolderOpenIcon, DocumentTextIcon, DocumentPlusIcon, ArrowDownTrayIcon, XMarkIcon, Cog6ToothIcon, AdjustmentsHorizontalIcon } from '@heroicons/react/24/solid';
 import { IconButton, TextButton } from '@/components/ui/Button';
 
 // Define the structure for a file item in the sidebar
@@ -470,6 +470,7 @@ export default function Sidebar({ onFileSelect, onLoadingChange, onSaveRequest }
         <IconButton icon={DocumentPlusIcon} onClick={handleCreateFile} />
         <IconButton icon={ArrowDownTrayIcon} onClick={handleSave} variant="primary" />
         <IconButton icon={XMarkIcon} onClick={handleCloseAll} />
+        <IconButton icon={Cog6ToothIcon} onClick={() => {}} />
       </div>
 
       {/* New file input dialog */}

@@ -39,12 +39,17 @@ export default function QuillEditor({ fileContent, fileName, onContentChange }: 
 
     isInitialized.current = true;
 
-    // Load everything dynamically
+    // Load KaTeX first, then everything else
     Promise.all([
+      import('katex'),
       import('quill'),
       import('@/lib/predictText')
-    ]).then(([QuillModule, predictModule]) => {
+    ]).then(([katexModule, QuillModule, predictModule]) => {
       const Quill = QuillModule.default;
+      
+      // Attach KaTeX to window for Quill's formula module
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (window as any).katex = katexModule.default;
       
       if (!editorRef.current || quillRef.current) return;
 
@@ -62,7 +67,7 @@ export default function QuillEditor({ fileContent, fileName, onContentChange }: 
         placeholder: 'Start typing...',
         modules: {
           toolbar: [
-            [{ 'header': [1, 2, 3, 4, 5, 6, false] }], // Dropdown with Normal option
+            [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
             [{ 'font': [] }],
             
             ['bold', 'italic', 'underline', 'strike'],
@@ -162,10 +167,9 @@ export default function QuillEditor({ fileContent, fileName, onContentChange }: 
   // Load file content when it changes
   useEffect(() => {
     if (quillRef.current && fileContent !== undefined) {
-      const CHUNK_SIZE = 10000; // Insert 10k characters at a time
+      const CHUNK_SIZE = 10000;
       
       if (fileContent.length > CHUNK_SIZE) {
-        // Clear editor first
         quillRef.current.setText('');
         
         let index = 0;
