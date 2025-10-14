@@ -33,9 +33,21 @@ Key Interaction: Type → See prediction → Press Tab to accept OR keep typing 
 + Quality of life (word count, toolbar with features)
 
 ### Implementation Checklist / Additional Features
-+ Dark/light mode toggle
-+ Folder and document navigation in sidebar
++ Dark/light mode toggle X
++ Folder and document navigation in sidebar X
 + Ghost text rendering of prediction
 + Mobile friendly design
 + Loading states and error handling
 + Vercel deployment
++ Reading time estimates
++ Paragraph and sentence counts
++ Spell checker
++ Auto-save with version history
++ Improve export options (pdf, markdown, plain text, html) and file saving
++ Sidebar scaling
++ Custom fonts and sizing
++ Optional toggle for line numbers
++ Table of contents auto-generated for navigation
++ Word frequency analysis
++ Syntax highlighting for codeblocks
++ Collaborative editing (more complex --> tbd)
