@@ -1,4 +1,4 @@
-import { OpenItem, FileItem } from '@/types/fileSystem';
+import { OpenItem } from '@/types/fileSystem';
 
 /**
  * Find a file or folder by ID in the tree

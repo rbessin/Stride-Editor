@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { OpenItem, FileItem, FolderItem } from '@/types/fileSystem';
+import { OpenItem } from '@/types/fileSystem';
 import { findItemById, updateFileHandle, toggleFolderExpansion } from '@/lib/fileTreeUtils';
 
 export function useFileTree() {

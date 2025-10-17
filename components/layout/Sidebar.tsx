@@ -33,6 +33,11 @@ export default function Sidebar({ onFileSelect, onLoadingChange, onSaveRequest }
     }
   };
 
+  const handleCloseFile = (id: string) => {
+    fileTree.removeItem(id);
+    if (fileTree.activeFileId === id && onFileSelect) {onFileSelect('', '', null);}
+  };
+
   const handleFileClick = async (fileItem: FileItem) => {
     fileTree.setActive(fileItem.id);
     await fileOps.readFile(fileItem);
@@ -107,7 +112,7 @@ export default function Sidebar({ onFileSelect, onLoadingChange, onSaveRequest }
         loadingFileId={fileOps.loadingFileId}
         onFileClick={handleFileClick}
         onFolderToggle={fileTree.toggleFolder}
-        onClose={fileTree.removeItem}
+        onClose={handleCloseFile}
       />
     </div>
   );

@@ -1,5 +1,3 @@
-// components/sidebar/NewFileDialog.tsx
-
 import { useState } from 'react';
 import { TextButton } from '@/components/ui/Button';
 
@@ -20,7 +18,7 @@ export function NewFileDialog({ onConfirm, onCancel }: NewFileDialogProps) {
   };
 
   return (
-    <div className="mt-2 p-2 bg-gray-100 dark:bg-gray-800 rounded">
+    <div className="mt-2 p-2 bg-secondary rounded">
       <input
         type="text"
         value={fileName}
@@ -30,16 +28,12 @@ export function NewFileDialog({ onConfirm, onCancel }: NewFileDialogProps) {
           if (e.key === 'Escape') onCancel();
         }}
         placeholder="Enter file name..."
-        className="w-full px-2 py-1 text-sm border rounded dark:bg-gray-700 dark:border-gray-600"
+        className="w-full px-2 py-1 text-sm rounded bg-tertiary"
         autoFocus
       />
       <div className="flex gap-2 mt-2">
-        <TextButton onClick={handleConfirm} variant="primary" size="md" className="flex-1">
-          Create
-        </TextButton>
-        <TextButton onClick={onCancel} variant="default" size="md" className="flex-1">
-          Cancel
-        </TextButton>
+        <TextButton onClick={handleConfirm} variant="success" size="md" className="flex-1">Create</TextButton>
+        <TextButton onClick={onCancel} variant="danger" size="md" className="flex-1">Cancel</TextButton>
       </div>
     </div>
   );
