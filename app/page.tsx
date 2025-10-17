@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useRef } from 'react';
-import Header from "@/components/layout/Header";
 import Sidebar from "@/components/layout/Sidebar";
+import Loading from "@/components/layout/Loading"
 import RichTextEditor from "@/components/editor/RichTextEditor";
 
 export default function Home() {
@@ -36,18 +36,10 @@ export default function Home() {
         <RichTextEditor 
           fileContent={currentFile?.content} 
           fileName={currentFile?.name}
-          onContentChange={(getContent) => {
-            editorContentRef.current = getContent;
-          }}
+          onContentChange={(getContent) => {editorContentRef.current = getContent;}}
         />
         
-        {isLoadingFile && (
-          <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white dark:bg-gray-800 px-6 py-4 rounded-lg shadow-lg">
-              <p className="text-lg">Loading file...</p>
-            </div>
-          </div>
-        )}
+        {isLoadingFile && (<Loading />)}
       </div>
     </div>
   );
