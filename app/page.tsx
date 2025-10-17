@@ -39,7 +39,7 @@ export default function Home() {
           onContentChange={(getContent) => {editorContentRef.current = getContent;}}
         />
         
-        {isLoadingFile && (<Loading />)}
+        {isLoadingFile && (<Loading type="file" styling='absolute inset-0'/>)}
       </div>
     </div>
   );
