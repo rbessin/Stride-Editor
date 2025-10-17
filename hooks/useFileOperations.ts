@@ -1,5 +1,3 @@
-// hooks/useFileOperations.ts
-
 import { useState } from 'react';
 import { FileItem, FolderItem } from '@/types/fileSystem';
 import { readDirectory, readFileInChunks, checkFileSize } from '@/lib/fileSystemUtils';

@@ -1,5 +1,3 @@
-// types/fileSystem.ts
-
 export interface FileItem {
   id: string;
   name: string;

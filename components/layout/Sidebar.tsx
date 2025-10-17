@@ -1,5 +1,3 @@
-// components/Sidebar.tsx
-
 import { useState } from 'react';
 import { FileItem } from '@/types/fileSystem';
 import { useFileTree } from '@/hooks/useFileTree';

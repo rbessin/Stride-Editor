@@ -1,5 +1,3 @@
-// lib/fileSystemUtils.ts
-
 import { FileItem, FolderItem } from '@/types/fileSystem';
 
 /**

@@ -1,6 +1,5 @@
 import React from 'react';
 
-// CHANGE: Added 'success', 'warning', and 'info' to ButtonVariant type
 type ButtonVariant = 'default' | 'primary' | 'success' | 'warning' | 'danger' | 'info';
 type ButtonSize = 'sm' | 'md' | 'lg';
 

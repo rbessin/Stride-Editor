@@ -1,5 +1,3 @@
-// lib/fileTreeUtils.ts
-
 import { OpenItem, FileItem } from '@/types/fileSystem';
 
 /**

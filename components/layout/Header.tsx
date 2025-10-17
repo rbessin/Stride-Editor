@@ -1,5 +1,3 @@
-import { TextButton } from "../ui/Button";
-
 export default function Header() {
     return (
         <header className="mb-1">

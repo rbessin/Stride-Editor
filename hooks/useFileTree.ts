@@ -1,5 +1,3 @@
-// hooks/useFileTree.ts
-
 import { useState } from 'react';
 import { OpenItem, FileItem, FolderItem } from '@/types/fileSystem';
 import { findItemById, updateFileHandle, toggleFolderExpansion } from '@/lib/fileTreeUtils';
