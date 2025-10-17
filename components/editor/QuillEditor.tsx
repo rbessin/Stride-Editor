@@ -234,6 +234,7 @@ export default function QuillEditor({ fileContent, fileName, onContentChange }: 
           {fileName && (<Label variant="primary" size="sm">{fileName}</Label>)}
           
           <Label variant="default" size="sm">Word count: {wordCount}</Label>
+          <Label variant="default" size="sm">Read time: {(wordCount/200).toFixed(2)}</Label>
           
           {!modelsLoaded && (<Label variant="warning" size="sm">Loading prediction models...</Label>)}
           {modelsLoaded && prediction && (
