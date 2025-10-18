@@ -34,10 +34,12 @@ export default function QuillEditor({ fileContent, fileName, onContentChange }: 
   // Reference to track Quill Editor instances and prevent double initialization
   const isInitialized = useRef(false);
   // State variables for model load and prediction states
-  const [prediction, setPrediction] = useState<string | null>(null);
+  const [prediction, setPrediction] = useState<{ word: string; modelType: string } | null>(null);
   const [modelsLoaded, setModelsLoaded] = useState(false);
   // Reference to track updating prediction
-  const predictionRef = useRef<string | null>(null);
+  const predictionRef = useRef<{ word: string; modelType: string } | null>(null);
+  // Reference to store predictModule so tab handler can access it
+  const predictModuleRef = useRef<typeof import('@/lib/predictText') | null>(null);
 
   useEffect(() => {
     // Prevents server initialization of component and double initialization
@@ -57,6 +59,9 @@ export default function QuillEditor({ fileContent, fileName, onContentChange }: 
       // Attaches KaTeX to window for Quill's formula module to access
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (window as any).katex = katexModule.default;
+      
+      // Store predictModule in ref for tab handler access
+      predictModuleRef.current = predictModule;
       
       // Exits if the editor div dissapeared or if Quill already exists
       if (!editorRef.current || quillRef.current) return;
@@ -98,17 +103,32 @@ export default function QuillEditor({ fileContent, fileName, onContentChange }: 
                 key: 9,
                 // Handles tab key presses
                 handler: function() {
-                  if (predictionRef.current && quillRef.current) {
+                  if (predictionRef.current && quillRef.current && predictModuleRef.current) {
                     // Gets current cursor position
                     const selection = quillRef.current.getSelection();
                     // If cursor position exists, get prediction text and clear both the state and reference
                     if (selection) {
-                      const predText = predictionRef.current;
+                      const predText = predictionRef.current.word;
                       setPrediction(null);
                       predictionRef.current = null;
                       // Inserts the word and a space at the cursor position and moves the cursor to after the inserted text
                       quillRef.current.insertText(selection.index, predText + ' ');
                       quillRef.current.setSelection(selection.index + predText.length + 1);
+                      
+                      // Get next prediction immediately after accepting current one
+                      const text = quillRef.current.getText() || '';
+                      const currentWords = text
+                        .trim()
+                        .split(/\s+/)
+                        .filter((word: string) => word.length > 0)
+                        .map((word: string) => word.toLowerCase());
+                      
+                      // Get new prediction if models are loaded
+                      if (predictModuleRef.current.areModelsLoaded()) {
+                        const newPred = predictModuleRef.current.predictNextWord(currentWords);
+                        setPrediction(newPred);
+                        predictionRef.current = newPred;
+                      }
                     }
                     return false;
                   }
@@ -237,7 +257,10 @@ export default function QuillEditor({ fileContent, fileName, onContentChange }: 
           
           {!modelsLoaded && (<Label variant="warning" size="sm">Loading prediction models...</Label>)}
           {modelsLoaded && prediction && (
-            <Label variant="info" size="sm">Press <kbd className="px-1 py-0.5 mx-1 bg-gray-300 dark:bg-gray-600 rounded">Tab</kbd> to accept &quot;{prediction}&quot;</Label>
+            <>
+              <Label variant="info" size="sm">Press <kbd className="px-1 py-0.5 mx-1 bg-gray-300 dark:bg-gray-600 rounded">Tab</kbd> to accept &quot;{prediction.word}&quot;</Label>
+              <Label variant="info" size="sm">{prediction.modelType}-gram</Label>
+            </>
           )}
         </div>
       </div>

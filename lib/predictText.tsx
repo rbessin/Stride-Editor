@@ -1,5 +1,6 @@
 import { NGramModel } from './nGramModel';
 
+let fourgramModel: NGramModel | null = null;
 let trigramModel: NGramModel | null = null;
 let bigramModel: NGramModel | null = null;
 let unigramModel: NGramModel | null = null;
@@ -13,6 +14,14 @@ export async function loadModels(): Promise<void> {
   }
 
   try {
+    // Load 4-gram model
+    const fourgramResponse = await fetch('/data/processed/fourgram-model.json');
+    if (!fourgramResponse.ok) {
+      throw new Error(`Failed to load fourgram model: ${fourgramResponse.status}`);
+    }
+    const fourgramData = await fourgramResponse.json();
+    fourgramModel = NGramModel.fromJSON(fourgramData);
+    
     // Load trigram model
     const trigramResponse = await fetch('/data/processed/trigram-model.json');
     if (!trigramResponse.ok) {
@@ -38,6 +47,7 @@ export async function loadModels(): Promise<void> {
     unigramModel = NGramModel.fromJSON(unigramData);
     
     console.log('Models loaded successfully!');
+    console.log('4-gram contexts:', fourgramModel.size());
     console.log('Trigram contexts:', trigramModel.size());
     console.log('Bigram contexts:', bigramModel.size());
     console.log('Unigram contexts:', unigramModel.size());
@@ -48,11 +58,12 @@ export async function loadModels(): Promise<void> {
 }
 
 // Predict next word with fallback strategy
-export function predictNextWord(words: string[]): string | null {
+// Returns { word: string; modelType: string } | null
+export function predictNextWord(words: string[]): { word: string; modelType: string } | null {
   if (words.length === 0) return null;
   
   // Check if models are loaded
-  if (!trigramModel && !bigramModel && !unigramModel) {
+  if (!fourgramModel && !trigramModel && !bigramModel && !unigramModel) {
     console.warn('Models not loaded yet');
     return null;
   }
@@ -60,24 +71,31 @@ export function predictNextWord(words: string[]): string | null {
   // Normalize words (lowercase, trim)
   const normalizedWords = words.map(w => w.toLowerCase().trim());
   
-  // Try trigram (2 words of context)
+  // Try 4-gram (3 words of context)
+  if (normalizedWords.length >= 3 && fourgramModel) {
+    const fourgramContext = normalizedWords.slice(-3);
+    const prediction = getBestPrediction(fourgramModel, fourgramContext, '4-gram');
+    if (prediction) return { word: prediction, modelType: '4' };
+  }
+  
+  // Fallback to trigram (2 words of context)
   if (normalizedWords.length >= 2 && trigramModel) {
     const trigramContext = normalizedWords.slice(-2);
     const prediction = getBestPrediction(trigramModel, trigramContext, 'trigram');
-    if (prediction) return prediction;
+    if (prediction) return { word: prediction, modelType: '3' };
   }
   
   // Fallback to bigram (1 word of context)
   if (normalizedWords.length >= 1 && bigramModel) {
     const bigramContext = normalizedWords.slice(-1);
     const prediction = getBestPrediction(bigramModel, bigramContext, 'bigram');
-    if (prediction) return prediction;
+    if (prediction) return { word: prediction, modelType: '2' };
   }
   
   // Fallback to unigram (most common words)
   if (unigramModel) {
     const prediction = getBestPrediction(unigramModel, [], 'unigram');
-    if (prediction) return prediction;
+    if (prediction) return { word: prediction, modelType: '1' };
   }
   
   return null;
@@ -112,5 +130,5 @@ function getBestPrediction(
 }
 
 export function areModelsLoaded(): boolean {
-  return trigramModel !== null && bigramModel !== null && unigramModel !== null;
+  return fourgramModel !== null && trigramModel !== null && bigramModel !== null && unigramModel !== null;
 }

@@ -20,12 +20,12 @@ export class NGramModel {
   // Add a sequence where context is an array of words
   addSequence(context: string[], nextWord: string): void {
     // Validate that context has the right length (n-1 words)
-    if (context.length !== this.n - 1) {
+    if (context.length !== this.n - 1 && this.n !== 1) {
       throw new Error(`Context must have ${this.n - 1} words for ${this.n}-gram model`);
     }
     
     // Join context words with a delimiter to create a unique key
-    const contextKey = context.join('|');
+    const contextKey = this.n === 1 ? '' : context.join('|');
     
     if (!this.nGrams.has(contextKey)) {
       this.nGrams.set(contextKey, new Map());
@@ -37,11 +37,11 @@ export class NGramModel {
   
   // Get possible next words given a context array
   getPossibleWords(context: string[]): Map<string, number> | undefined {
-    if (context.length !== this.n - 1) {
+    if (context.length !== this.n - 1 && this.n !== 1) {
       return undefined;
     }
     
-    const contextKey = context.join('|');
+    const contextKey = this.n === 1 ? '' : context.join('|');
     return this.nGrams.get(contextKey);
   }
   
