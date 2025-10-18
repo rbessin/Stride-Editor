@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { TextButton } from '@/components/ui/Button';
+import { Input } from '../ui/Input';
 
 interface NewFileDialogProps {
   onConfirm: (fileName: string) => void;
@@ -19,17 +20,17 @@ export function NewFileDialog({ onConfirm, onCancel }: NewFileDialogProps) {
 
   return (
     <div className="mt-2 p-2 bg-secondary rounded">
-      <input
+      <Input
         type="text"
         value={fileName}
         onChange={(e) => setFileName(e.target.value)}
         onKeyDown={(e) => {
-          if (e.key === 'Enter') handleConfirm();
-          if (e.key === 'Escape') onCancel();
+            if (e.key === 'Enter') handleConfirm();
+            if (e.key === 'Escape') onCancel();
         }}
         placeholder="Enter file name..."
-        className="w-full px-2 py-1 text-sm rounded bg-tertiary"
         autoFocus
+        size="md"
       />
       <div className="flex gap-2 mt-2">
         <TextButton onClick={handleConfirm} variant="success" size="md" className="flex-1">Create</TextButton>

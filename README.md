@@ -37,10 +37,9 @@ Key Interaction: Type → See prediction → Press Tab to accept OR keep typing 
 + Folder and document navigation in sidebar X
 + Ghost text rendering of prediction
 + Mobile friendly design
-+ Loading states and error handling
++ Loading states X
 + Vercel deployment
-+ Reading time estimates
-+ Paragraph and sentence counts
++ Reading time estimates X
 + Spell checker
 + Auto-save with version history
 + Improve export options (pdf, markdown, plain text, html) and file saving
