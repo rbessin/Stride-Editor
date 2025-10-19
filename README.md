@@ -38,7 +38,7 @@ Key Interaction: Type → See prediction → Press Tab to accept OR keep typing 
 + Ghost text rendering of prediction
 + Mobile friendly design
 + Loading states X
-+ Vercel deployment
++ Vercel deployment X
 + Reading time estimates X
 + Spell checker
 + Auto-save
