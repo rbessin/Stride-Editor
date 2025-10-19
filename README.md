@@ -41,12 +41,10 @@ Key Interaction: Type → See prediction → Press Tab to accept OR keep typing 
 + Vercel deployment
 + Reading time estimates X
 + Spell checker
-+ Auto-save with version history
++ Auto-save
 + Improve export options (pdf, markdown, plain text, html) and file saving
 + Sidebar scaling
 + Custom fonts and sizing
 + Optional toggle for line numbers
 + Table of contents auto-generated for navigation
-+ Word frequency analysis
 + Syntax highlighting for codeblocks
-+ Collaborative editing (more complex --> tbd)
