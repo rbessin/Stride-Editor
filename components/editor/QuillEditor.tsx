@@ -60,6 +60,12 @@ export default function QuillEditor({ fileContent, fileName, onContentChange }: 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (window as any).katex = katexModule.default;
       
+      // Register custom fonts
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const Font = Quill.import('formats/font') as any;
+      Font.whitelist = ['arial', 'comic-sans', 'courier-new', 'georgia', 'helvetica', 'lucida', 'times-new-roman', 'verdana'];
+      Quill.register(Font, true);
+      
       // Store predictModule in ref for tab handler access
       predictModuleRef.current = predictModule;
       
@@ -80,7 +86,7 @@ export default function QuillEditor({ fileContent, fileName, onContentChange }: 
         modules: {
           toolbar: [
             [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-            [{ 'font': [] }],
+            [{ 'font': ['arial', 'comic-sans', 'courier-new', 'georgia', 'helvetica', 'lucida', 'times-new-roman', 'verdana'] }],
             
             ['bold', 'italic', 'underline', 'strike'],
             [{ 'color': [] }, { 'background': [] }],

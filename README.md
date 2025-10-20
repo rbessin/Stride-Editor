@@ -35,7 +35,6 @@ Key Interaction: Type → See prediction → Press Tab to accept OR keep typing 
 ### Implementation Checklist / Additional Features
 + Dark/light mode toggle X
 + Folder and document navigation in sidebar X
-+ Ghost text rendering of prediction
 + Mobile friendly design
 + Loading states X
 + Vercel deployment X
@@ -44,7 +43,7 @@ Key Interaction: Type → See prediction → Press Tab to accept OR keep typing 
 + Auto-save
 + Improve export options (pdf, markdown, plain text, html) and file saving
 + Sidebar scaling
-+ Custom fonts and sizing
++ Custom fonts and sizing X
 + Optional toggle for line numbers
 + Table of contents auto-generated for navigation
 + Syntax highlighting for codeblocks
