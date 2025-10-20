@@ -11,9 +11,10 @@ interface SidebarProps {
   onFileSelect?: (content: string, fileName: string, fileHandle: FileSystemFileHandle | null) => void;
   onLoadingChange?: (isLoading: boolean) => void;
   onSaveRequest?: () => Promise<{ content: string; fileName: string }>;
+  width?: number;
 }
 
-export default function Sidebar({ onFileSelect, onLoadingChange, onSaveRequest }: SidebarProps) {
+export default function Sidebar({ onFileSelect, onLoadingChange, onSaveRequest, width = 250 }: SidebarProps) {
   const fileTree = useFileTree();
   const fileOps = useFileOperations({ onFileSelect, onLoadingChange });
   const [isCreatingFile, setIsCreatingFile] = useState(false);
@@ -87,7 +88,7 @@ export default function Sidebar({ onFileSelect, onLoadingChange, onSaveRequest }
   };
 
   return (
-    <div className="flex flex-col w-1/6 p-1 bg-white dark:bg-tertiary">
+    <div className="flex flex-col w-1/6 p-1 bg-white dark:bg-tertiary" style={{ width: `${width}px` }}>
       <Header />
       
       <SidebarActions

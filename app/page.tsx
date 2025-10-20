@@ -4,6 +4,7 @@ import { useState, useRef } from 'react';
 import Sidebar from "@/components/layout/Sidebar";
 import Loading from "@/components/layout/Loading"
 import RichTextEditor from "@/components/editor/RichTextEditor";
+import { ResizeHandle } from "@/components/layout/ResizeHandle";
 
 export default function Home() {
   const [currentFile, setCurrentFile] = useState<{
@@ -12,6 +13,7 @@ export default function Home() {
     handle: FileSystemFileHandle | null;
   } | null>(null);
   const [isLoadingFile, setIsLoadingFile] = useState(false);
+  const [sidebarWidth, setSidebarWidth] = useState(250);
   const editorContentRef = useRef<(() => Promise<{ content: string; fileName: string }>) | null>(null);
 
   const handleFileSelect = (content: string, fileName: string, fileHandle: FileSystemFileHandle | null) => {
@@ -19,9 +21,9 @@ export default function Home() {
   };
 
   const handleSaveRequest = async () => {
-  if (editorContentRef.current) {
-    return await editorContentRef.current();
-  }
+    if (editorContentRef.current) {
+      return await editorContentRef.current();
+    }
     return { content: '', fileName: currentFile?.name || 'untitled.txt' };
   };
 
@@ -29,9 +31,15 @@ export default function Home() {
     <div className="h-screen flex flex-col">
       <div className="flex flex-1 overflow-hidden relative">
         <Sidebar 
+          width={sidebarWidth}
           onFileSelect={handleFileSelect}
           onLoadingChange={setIsLoadingFile}
           onSaveRequest={handleSaveRequest}
+        />
+        <ResizeHandle 
+          onResize={setSidebarWidth}
+          minWidth={150}
+          maxWidth={600}
         />
         <RichTextEditor 
           fileContent={currentFile?.content} 
