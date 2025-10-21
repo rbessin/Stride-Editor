@@ -8,8 +8,6 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
 ## Tech Stack
 Next.js 14 - Framework (easy routing, fast deployment)
 Quill.js - Editor (simple API text editor, handles cursor/text manipulation)
@@ -40,8 +38,5 @@ Key Interaction: Type → See prediction → Press Tab to accept OR keep typing 
 + Vercel deployment X
 + Reading time estimates X
 + Spell checker X
-+ Auto-save
-+ Improve export options (pdf, markdown, plain text, html) and file saving
-+ Sidebar scaling
++ Sidebar scaling X
 + Custom fonts and sizing X
-+ Optional toggle for line numbers
