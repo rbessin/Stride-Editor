@@ -1,8 +1,6 @@
 # Stride Editor
 
 A modern text editor with AI-powered predictive text, built to explore natural language processing and modern web development practices.
-
-**Developer:** Raphael Bessin, Computer Science @ Northeastern University  
 **Live Demo:** [Vercel Deployment](https://stride-text-editor.vercel.app/)
 
 ## Overview
