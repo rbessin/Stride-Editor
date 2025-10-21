@@ -57,11 +57,9 @@ export default function QuillEditor({ fileContent, fileName, onContentChange }: 
       const Quill = QuillModule.default;
       
       // Attaches KaTeX to window for Quill's formula module to access
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (window as any).katex = katexModule.default;
       
       // Register custom fonts
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const Font = Quill.import('formats/font') as any;
       Font.whitelist = ['arial', 'comic-sans', 'courier-new', 'georgia', 'helvetica', 'lucida', 'times-new-roman', 'verdana'];
       Quill.register(Font, true);
@@ -253,7 +251,7 @@ export default function QuillEditor({ fileContent, fileName, onContentChange }: 
       <div className="flex-1 bg-secondary flex flex-col">
         <div
           ref={editorRef} 
-          className="flex-1 prose dark:prose-invert max-w-none relative"
+          className="flex-1 max-w-none relative"
         />
         
         <div className="text-xs my-1 mx-1 flex gap-2 items-center">
@@ -265,8 +263,10 @@ export default function QuillEditor({ fileContent, fileName, onContentChange }: 
           {!modelsLoaded && (<Label variant="warning" size="sm">Loading prediction models...</Label>)}
           {modelsLoaded && prediction && (
             <>
-              <Label variant="info" size="sm">Press <kbd className="px-1 py-0.5 mx-1 bg-gray-300 dark:bg-gray-600 rounded">Tab</kbd> to accept &quot;{prediction.word}&quot;</Label>
-              <Label variant="info" size="sm">{prediction.modelType}-gram</Label>
+              <Label variant="info" size="sm" className='bg-tertiary'>
+                Press <kbd className="px-1 mx-1 bg-secondary rounded text-xs">Tab</kbd>to accept &quot;{prediction.word}&quot;
+              </Label>
+              <Label variant="info" size="sm" className='bg-tertiary'>{prediction.modelType}-gram</Label>
             </>
           )}
         </div>

@@ -7,6 +7,7 @@ import RichTextEditor from "@/components/editor/RichTextEditor";
 import { ResizeHandle } from "@/components/layout/ResizeHandle";
 
 export default function Home() {
+  // Set current file, file load status, sidebar width, editor content reference
   const [currentFile, setCurrentFile] = useState<{
     content: string;
     name: string;
@@ -15,11 +16,11 @@ export default function Home() {
   const [isLoadingFile, setIsLoadingFile] = useState(false);
   const [sidebarWidth, setSidebarWidth] = useState(250);
   const editorContentRef = useRef<(() => Promise<{ content: string; fileName: string }>) | null>(null);
-
+  // Updates the currently selected file
   const handleFileSelect = (content: string, fileName: string, fileHandle: FileSystemFileHandle | null) => {
     setCurrentFile({ content, name: fileName, handle: fileHandle });
   };
-
+  // Returns the current open file and its content
   const handleSaveRequest = async () => {
     if (editorContentRef.current) {
       return await editorContentRef.current();

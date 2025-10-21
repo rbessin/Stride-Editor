@@ -1,8 +1,9 @@
 import React from 'react';
 
+// Define label variant and size types
 type LabelVariant = 'default' | 'primary' | 'success' | 'warning' | 'danger' | 'info';
 type LabelSize = 'sm' | 'md' | 'lg';
-
+// Interface for label properties
 interface LabelProps {
   children: React.ReactNode;
   variant?: LabelVariant;

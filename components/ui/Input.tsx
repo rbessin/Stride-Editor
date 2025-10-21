@@ -1,7 +1,8 @@
 import React from "react";
 
+// Define input size type
 type InputSize = 'sm' | 'md' | 'lg';
-
+// Interface for input properties
 interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
     size?: InputSize;
     className?: string;

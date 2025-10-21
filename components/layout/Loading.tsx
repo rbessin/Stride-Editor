@@ -1,5 +1,6 @@
 import { Label } from "../ui/Label"
 
+// Interface for loading properties
 interface LoadingProps {
     type: string;
     styling?: string;

@@ -2,14 +2,13 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 
+// Define theme color type
 type Theme = "light" | "dark";
-
+// Define theme context
 const ThemeContext = createContext<{
-  theme: Theme;
-  setTheme: (theme: Theme) => void;
+  theme: Theme; setTheme: (theme: Theme) => void;
 }>({
-  theme: "light",
-  setTheme: () => {},
+  theme: "light",setTheme: () => {},
 });
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {

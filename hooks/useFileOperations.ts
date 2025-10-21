@@ -10,9 +10,7 @@ interface UseFileOperationsProps {
 export function useFileOperations({ onFileSelect, onLoadingChange }: UseFileOperationsProps) {
   const [loadingFileId, setLoadingFileId] = useState<string | null>(null);
 
-  /**
-   * Open a folder using the native picker
-   */
+  //Open a folder using the native picker
   const openFolder = async (): Promise<FolderItem | null> => {
     try {
       const dirHandle = await window.showDirectoryPicker();
@@ -34,9 +32,7 @@ export function useFileOperations({ onFileSelect, onLoadingChange }: UseFileOper
     }
   };
 
-  /**
-   * Open a single file using the native picker
-   */
+  //Open a single file using the native picker
   const openFile = async (): Promise<FileItem | null> => {
     try {
       const [fileHandle] = await window.showOpenFilePicker();
@@ -55,9 +51,7 @@ export function useFileOperations({ onFileSelect, onLoadingChange }: UseFileOper
     }
   };
 
-  /**
-   * Read a file's content and notify parent
-   */
+  //Read a file's content and notify parent
   const readFile = async (fileItem: FileItem): Promise<void> => {
     try {
       // If it's a new file without a handle, just open it empty
@@ -95,9 +89,7 @@ export function useFileOperations({ onFileSelect, onLoadingChange }: UseFileOper
     }
   };
 
-  /**
-   * Save content to a file
-   */
+  //Save content to a file
   const saveFile = async (
     fileHandle: FileSystemFileHandle | null,
     content: string,

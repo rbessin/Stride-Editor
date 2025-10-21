@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 
+// Interface for the resize handle properties
 interface ResizeHandleProps {
   onResize: (width: number) => void;
   minWidth?: number;
@@ -12,24 +13,23 @@ export function ResizeHandle({ onResize, minWidth = 150, maxWidth = 600 }: Resiz
   const [isResizing, setIsResizing] = useState(false);
 
   useEffect(() => {
+    // Handle house movement when mouse down
     const handleMouseMove = (e: MouseEvent) => {
       if (!isResizing) return;
       
       const newWidth = Math.max(minWidth, Math.min(maxWidth, e.clientX));
       onResize(newWidth);
     };
-
-    const handleMouseUp = () => {
-      setIsResizing(false);
-    };
-
+    // Handle mouse up
+    const handleMouseUp = () => {setIsResizing(false);};
+    // Handle mouse movement when mouse is down
     if (isResizing) {
       document.addEventListener('mousemove', handleMouseMove);
       document.addEventListener('mouseup', handleMouseUp);
       document.body.style.cursor = 'col-resize';
       document.body.style.userSelect = 'none';
     }
-
+    // Stops handling mouse movement when mouse is up
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseup', handleMouseUp);
@@ -41,7 +41,7 @@ export function ResizeHandle({ onResize, minWidth = 150, maxWidth = 600 }: Resiz
   return (
     <div
       onMouseDown={() => setIsResizing(true)}
-      className="w-1 bg-gray-300 dark:bg-gray-600 hover:bg-blue-500 dark:hover:bg-blue-400 cursor-col-resize transition-colors flex-shrink-0"
+      className="w-2 border-x-2 border-tertiary bg-secondary hover:bg-blue-500 cursor-col-resize transition-colors flex-shrink-0"
     />
   );
 }

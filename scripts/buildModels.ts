@@ -10,7 +10,7 @@ function tokenize(text: string): string[] {
   // Normalize: lowercase, split on whitespace and punctuation
   return text
     .toLowerCase()
-    .replace(/[^\w\s']/g, ' ') // Keep apostrophes for contractions
+    .replace(/[^\w\s']/g, ' ')
     .split(/\s+/)
     .filter(word => word.length > 0);
 }

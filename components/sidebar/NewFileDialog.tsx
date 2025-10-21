@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { TextButton } from '@/components/ui/Button';
 import { Input } from '../ui/Input';
 
+// Interface for Dialog Properties
 interface NewFileDialogProps {
   onConfirm: (fileName: string) => void;
   onCancel: () => void;
@@ -9,12 +10,9 @@ interface NewFileDialogProps {
 
 export function NewFileDialog({ onConfirm, onCancel }: NewFileDialogProps) {
   const [fileName, setFileName] = useState('');
-
+  // Handler for dialog confirmation
   const handleConfirm = () => {
-    if (!fileName.trim()) {
-      alert('Please enter a file name');
-      return;
-    }
+    if (!fileName.trim()) {alert('Please enter a file name'); return;}
     onConfirm(fileName);
   };
 

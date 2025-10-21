@@ -1,10 +1,9 @@
-// components/sidebar/FileTreeItem.tsx
-
 import type { ReactElement } from 'react';
 import { XMarkIcon } from '@heroicons/react/24/solid';
 import { IconButton } from '@/components/ui/Button';
 import { OpenItem, FileItem } from '@/types/fileSystem';
 
+// Interface for tree item properties
 interface FileTreeItemProps {
   item: OpenItem;
   depth: number;
@@ -16,25 +15,19 @@ interface FileTreeItemProps {
 }
 
 export function FileTreeItem({
-  item,
-  depth,
-  isActive,
-  isLoading,
-  onFileClick,
-  onFolderToggle,
-  onClose
+  item, depth, isActive, isLoading,
+  onFileClick, onFolderToggle, onClose
 }: FileTreeItemProps): ReactElement {
   const paddingLeft = depth * 16 + 8;
 
   if (item.type === 'file') {
     return (
       <div
-        className={`flex items-center justify-between px-2 py-1 rounded text-sm cursor-pointer ${
-          isActive 
-            ? 'bg-blue-200 dark:bg-blue-900'
-            : 'bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700'
-        }`}
-        style={{ paddingLeft: `${paddingLeft}px` }}
+        className={`flex items-center justify-between px-2 py-1 rounded text-sm cursor-pointer hover:opacity-80`}
+        style={{ 
+          paddingLeft: `${paddingLeft}px`,
+          backgroundColor: isActive ? 'var(--color-quinary)' : 'var(--color-quaternary)'
+        }}
         onClick={() => !isLoading && onFileClick(item)}
       >
         <div className="flex items-center gap-x-2 overflow-hidden">
@@ -60,8 +53,11 @@ export function FileTreeItem({
   return (
     <div>
       <div
-        className="flex items-center justify-between px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded text-sm hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer"
-        style={{ paddingLeft: `${paddingLeft}px` }}
+        className="flex items-center justify-between px-2 py-1 rounded text-sm hover:opacity-80 cursor-pointer"
+        style={{ 
+          paddingLeft: `${paddingLeft}px`,
+          backgroundColor: 'var(--color-quaternary)'
+        }}
         onClick={() => onFolderToggle(item.id)}
       >
         <div className="flex items-center gap-x-2 overflow-hidden">

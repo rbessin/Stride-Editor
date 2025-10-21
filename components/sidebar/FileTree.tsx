@@ -1,8 +1,7 @@
-// components/sidebar/FileTree.tsx
-
 import { OpenItem, FileItem } from '@/types/fileSystem';
 import { FileTreeItem } from './FileTreeItem';
 
+// Interface for file tree properties
 interface FileTreeProps {
   items: OpenItem[];
   activeFileId: string | null;
@@ -13,12 +12,8 @@ interface FileTreeProps {
 }
 
 export function FileTree({
-  items,
-  activeFileId,
-  loadingFileId,
-  onFileClick,
-  onFolderToggle,
-  onClose
+  items, activeFileId, loadingFileId,
+  onFileClick, onFolderToggle, onClose
 }: FileTreeProps) {
   return (
     <div className="flex flex-col gap-y-1 mt-2">

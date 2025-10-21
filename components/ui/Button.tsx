@@ -1,8 +1,9 @@
 import React from 'react';
 
+// Define button variant and size types
 type ButtonVariant = 'default' | 'primary' | 'success' | 'warning' | 'danger' | 'info';
 type ButtonSize = 'sm' | 'md' | 'lg';
-
+// Interface for base button properties
 interface BaseButtonProps {
   onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
   variant?: ButtonVariant;
@@ -10,16 +11,15 @@ interface BaseButtonProps {
   disabled?: boolean;
   className?: string;
 }
-
+// Interface for additional icon button properties
 interface IconButtonProps extends BaseButtonProps {
   icon: React.ComponentType<{ className?: string }>;
 }
-
+// Interface for additional text button properties
 interface TextButtonProps extends BaseButtonProps {
   children: React.ReactNode;
 }
 
-// Icon Button
 export function IconButton({ 
   icon: Icon, 
   onClick, 
@@ -64,7 +64,6 @@ export function IconButton({
   );
 }
 
-// Text Button
 export function TextButton({ 
   children,
   onClick, 

@@ -1,5 +1,3 @@
-// components/sidebar/SidebarActions.tsx
-
 import {
   FolderOpenIcon,
   DocumentTextIcon,
@@ -11,6 +9,7 @@ import {
 import { IconButton } from '@/components/ui/Button';
 import { ThemeToggle } from '@/components/theme/theme-toggle';
 
+// Interface for sidebar action properties
 interface SidebarActionsProps {
   onOpenFolder: () => void;
   onOpenFile: () => void;

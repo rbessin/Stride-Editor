@@ -5,6 +5,8 @@
   --color-primary: #F3F3E3;
   --color-secondary: #7d928a;
   --color-tertiary: #606F69;
+  --color-quaternary: #E8E8D8;
+  --color-quinary: #9BA8A3;     
   --color-background: #ffffff;
   --color-foreground: #171717;
   
@@ -25,6 +27,8 @@ html.dark {
   --color-primary: #1a1a1a;
   --color-secondary: #2d3436;
   --color-tertiary: #3d4f48;
+  --color-quaternary: #252525;
+  --color-quinary: #4a5c55;
   --color-background: #0a0a0a;
   --color-foreground: #ededed;
   

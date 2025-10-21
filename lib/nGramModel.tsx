@@ -10,7 +10,7 @@ interface NGramJSON {
 
 export class NGramModel {
   private nGrams: Map<string, Map<string, number>>;
-  private n: number; // The order of the n-gram (2 for bigram, 3 for trigram, etc.)
+  private n: number;
   
   constructor(n: number = 3) {
     this.nGrams = new Map();
